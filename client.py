@@ -5,7 +5,7 @@ import random
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host = "127.0.0.1" # Your IP. Usually empty.
+host = "127.0.0.1" # IP for bot to connect to.
 port = 8888 # The infected connection port
 
 connected = False
