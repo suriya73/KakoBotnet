@@ -9,3 +9,7 @@ Email: gotenblack321@gmail.com<br>
 # Current Updates
 [FIX] Kako.py - Bots have been recently disconnecting for no reason. So I have fixed the issue<br>
 [ADDED] Client.py - Added auto reconnect functionality<br>
+# 25/02/2018
+[ADDED] Client.py - Added Shell command to access bots terminal<br>
+[ADDED] Client.py - Added multi threading<br>
+[ADDED] Kako.py - Just added information on how to use shell comand in ">help"<br>
