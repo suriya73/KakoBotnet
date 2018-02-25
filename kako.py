@@ -7,7 +7,7 @@ from json import load
 from urllib2 import urlopen
 from thread import start_new_thread
 
-connect = "" # IP For bots. Usually Empty.
+connect = "" # IP. Usually Empty.
 conport = 8080 # Your Port
 infport = 8000 # Bot Port
 
