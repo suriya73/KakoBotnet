@@ -13,3 +13,6 @@ Email: gotenblack321@gmail.com<br>
 [ADDED] Client.py - Added Shell command to access bots terminal<br>
 [ADDED] Client.py - Added multi threading<br>
 [ADDED] Kako.py - Just added information on how to use shell comand in ">help"<br>
+# 28/02/2018
+[ADDED] Kako.py - New command ">password" changes the guest password temporarily for the session, (only admins can use it)<br>
+[ADDED] Kako.py - ">help" command now shows how to use ">password" only admins can see the command<br>
