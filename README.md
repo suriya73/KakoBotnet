@@ -2,6 +2,8 @@
 This is a Python DDoS botnet.<br>
 This botnet may have a few bugs, but, for what I have seen it works so far<br>
 If I have made fixes I will post them here and state what was fixed<br>
+# Compiling
+Ok so if you are trying to use this botnet for mass infecting busy boxes or something like that. I recommend Nuitka it allows you to compile python2 or 3 into a linux binary file<br>
 # Contact Information
 Skype: live:zerefdragneelbro<br>
 Discord: [SuperNova] Law#6800<br>
