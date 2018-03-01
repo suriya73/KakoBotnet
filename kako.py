@@ -83,6 +83,8 @@ def clientThread(conn):
 					conn.sendall("[>] and [<] = Notice\r\n")
 					conn.sendall("[?] = Information\r\n")
 					conn.sendall("[!] = Warning\r\n")
+					conn.sendall("[?] - You can only send 1 attack after another. By that I mean if I sent an attack\r\n")
+					conn.sendall("for 30 seconds you can only send another attack after those 30 seconds\r\n")
 					conn.sendall("\r\n")
 					conn.sendall("[>] Server Commands [<]\r\n")
 					conn.sendall("[?] >help - Displays a help menu like this\r\n")
