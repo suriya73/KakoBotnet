@@ -18,3 +18,6 @@ Email: gotenblack321@gmail.com<br>
 # 28/02/2018
 [ADDED] Kako.py - New command ">password" changes the guest password temporarily for the session, (only admins can use it)<br>
 [ADDED] Kako.py - ">help" command now shows how to use ">password" only admins can see the command<br>
+# 01/03/2018
+[ADDED] Client.py - New DDoS command ">http" there is no timer but the attack does stop once all the threads have been sent<br>
+[ADDED] Kako.py - ">help" command has been updated to have the information on how to use ">http"<br>
