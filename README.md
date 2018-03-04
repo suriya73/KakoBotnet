@@ -25,5 +25,5 @@ Email: gotenblack321@gmail.com<br>
 [FIX] Kako.py - Command ">password" has been fixed the issue was there was a indent not needing to be there<br>
 [FIX] Kako.py - Guest account would not work because the var "pwordGuest" was not global, now it is<br>
 # 04/03/2018
-[FIX] client.py - Command ">http" now supports a time limit in the attack<br>
-[FIX] Kako.py - Updated info in ">help" on how to use ">http"<br>
+[ADDED] client.py - Command ">http" now supports a time limit in the attack<br>
+[ADDED] Kako.py - Updated info in ">help" on how to use ">http"<br>
