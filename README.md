@@ -27,3 +27,5 @@ Email: gotenblack321@gmail.com<br>
 # 04/03/2018
 [ADDED] Client.py - Command ">http" now supports a time limit in the attack<br>
 [ADDED] Kako.py - Updated info in ">help" on how to use ">http"<br>
+# 05/03/2018
+[ADDED] Client.py - Command ">http" now attacks with HTTP GET and has User-Agents<br>
