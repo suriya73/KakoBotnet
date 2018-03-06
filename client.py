@@ -122,7 +122,7 @@ def system():
 								sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 								resolvedHost = socket.gethostbyname(ip)
 
-								query = str("GET / HTTP/1.1\nHost: "+resolvedHost+"\n\n User-Agent: "+random.choice(userAgents)+"\n"+headers).encode('utf-8')
+								query = str("GET / HTTP/1.1\nHost: "+resolvedHost+"\n\nUser-Agent: "+random.choice(userAgents)+"\n"+headers).encode('utf-8')
 								sock.connect((resolvedHost, 80))
 								sock.sendall(query)
 								sock.close()
