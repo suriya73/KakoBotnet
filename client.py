@@ -7,7 +7,7 @@ import threading
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host = "localhost" # IP for the bot to connect to
+host = "" # IP for the bot to connect to
 port = 8888 # Port for the bot to connect to
 
 connected = False
