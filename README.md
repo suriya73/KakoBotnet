@@ -29,3 +29,5 @@ Email: gotenblack321@gmail.com<br>
 [ADDED] Kako.py - Updated info in ">help" on how to use ">http"<br>
 # 05/03/2018
 [ADDED] Client.py - Command ">http" now attacks with HTTP GET and has User-Agents<br>
+# 19/03/2018
+[ADDED] Client.py - New function makes the bot open the file on startup no matter what the file is called.
